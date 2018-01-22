@@ -8,4 +8,5 @@ my_games = {
 }
 
 print(my_games)
+#中文编码不支持！
 
