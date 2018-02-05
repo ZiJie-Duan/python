@@ -22,7 +22,7 @@ class Coffee(object):
 	    self.tea = ['抹茶拿铁','红茶拿铁','冰摇桃桃绿茶','冰摇柚柚蜂蜜红茶','冰摇红莓黑加仑茶','冰摇芒果花草茶','冰摇柠檬茶','乌龙茶']
 	    self.xbl = ['抹茶','抹茶可可碎片','浓缩咖啡','焦糖咖啡','摩卡可可碎片','榛果风味摩卡','香草风味','芒果西番莲果茶','芒果豆奶']
 	    self.ps = ''
-	    self.name_1 = ''
+	    self.name = ''
 	    self.size = ''
 
 	def work_process(self):
@@ -39,12 +39,12 @@ class Coffee(object):
 		sham_name = raw_input('\t名称：')
 		sham_size = raw_input('\t(小杯/大杯/超大杯)：')
 		sham_ps = raw_input('\t备注：')
-		self.name_1 = sham_name
+		self.name = sham_name
 		self.ps = sham_ps
 		self.size = sham_size
 
 		print('\n您的订单：')
-		print('\t名称：' + self.name_1)
+		print('\t名称：' + self.name)
 		print('\t大小：' + self.size)
 		print('\t备注：' + self.ps)
 
