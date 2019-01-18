@@ -1,0 +1,20 @@
+digraph startgame {
+
+	start -> get_y_r
+	get_y_r -> get_x_r 
+
+	get_x_r -> if_zt_is_1_or_2
+
+	if_zt_is_1_or_2 -> change_1_to_0[label="is_1"]
+
+	if_zt_is_1_or_2 -> change_2_to_1[label="is_2"]
+
+	change_2_to_1 -> get_for_poin
+	get_for_poin -> if_the_poin_is_1or2or0
+
+	if_the_poin_is_1or2or0 -> no_change[label="is_1"]
+	if_the_poin_is_1or2or0 -> no_change[label="is_2"]
+	if_the_poin_is_1or2or0 -> change_0to2[label="is_0"]
+
+
+}
