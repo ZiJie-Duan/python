@@ -1,0 +1,9 @@
+constant
+variable
+linear
+gradient
+comparison
+per
+concentration
+solute
+solvent
