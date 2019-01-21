@@ -1,1 +1,0 @@
-[["恒定的，不变的","constant"],["变化的","variable"],["直线的","linear"],["斜率","gradient"],["比较，对比","comparison"],["每，每个","per"],["浓度","concentration"],["溶质","solute"],["溶剂","solvent"]]

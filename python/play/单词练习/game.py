@@ -1,5 +1,44 @@
 # -- coding:utf-8--
 import random
+import xlrd
+
+
+def read_word():
+	#用于读取word的函数
+	#返回一个二维数组
+	word = []
+	#打开xlsx
+	workbook = xlrd.open_workbook(r'word.xlsx')
+	#导出一个表
+	sheet = workbook.sheet_by_index(0)#使用索引导出
+
+	#将表中的值按列导出
+	ch2 = sheet.col_values(1)
+
+	en2 = sheet.col_values(2)
+	ch = []
+	en = []
+
+	for x in ch2:
+		y = str(x)
+		ch.append(y)
+
+	for x in en2:
+		y = str(x)
+		en.append(y)
+
+
+	#求出列表含有多少个单词
+	number_word = len(en)
+	for x in range(number_word):
+
+		#组合为一个单词二维列表
+		add_word = [ch[x],en[x]]
+		word.append(add_word)
+
+	return word
+
+'''
 
 def read_word():
 	#用于读取word的函数
@@ -31,6 +70,7 @@ def read_word():
 
 	return word
 
+'''
 
 def random_word(english,chinese):
 	#拼写函数
@@ -75,6 +115,8 @@ def mc_word_ch(english,chinese,chinese2,chinese3,chinese4):
 			print("Wrong, please try again.")
 
 
+
+
 def mc_word_en(english,chinese,english2,english3,english4):
 
 	#用于进行英文选择题的函数
@@ -95,6 +137,7 @@ def mc_word_en(english,chinese,english2,english3,english4):
 	print("")
 
 	while True:	
+
 		mc = input("Please enter the correct serial number： ")
 		#获取用户选择答案
 		mcc = lb_sj[int(mc)-1]
@@ -104,6 +147,8 @@ def mc_word_en(english,chinese,english2,english3,english4):
 		else:
 			print("Wrong, please try again.")
 
+
+			
 
 def random_list(list):
 	#随机列表生成函数
@@ -211,4 +256,5 @@ def main():
 				mc_word_ch(en,ch,ch2,ch3,ch4)
 
 
-main()
+while True:
+	main()
