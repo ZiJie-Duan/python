@@ -18,7 +18,7 @@ def read_word():
 	en2 = sheet.col_values(2)
 	ch = []
 	en = []
-
+	#全部转为str以防出现错误
 	for x in ch2:
 		y = str(x)
 		ch.append(y)
