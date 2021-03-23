@@ -8,7 +8,7 @@ def read_word():
 	#返回一个二维数组
 	word = []
 	#打开xlsx
-	workbook = xlrd.open_workbook(r'word.xlsx')
+	workbook = xlrd.open_workbook(r'/Users/lucy/Desktop/python/python/play/单词练习/word.xlsx')
 	#导出一个表
 	sheet = workbook.sheet_by_index(0)#使用索引导出
 
