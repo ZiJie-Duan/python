@@ -1,4 +1,5 @@
 import time
+import sys
 
 class MessagePrinter:
 
@@ -56,28 +57,34 @@ class MessageBox:
             mp = MessagePrinter()
             mp.source = func.__name__
             mp.print("function is running","IS-info")
+            exec("self.cla.{}_mp = mp".format(mp.source))
             func(self.cla, *args, **kwds)
         return wrapper
 
+def printm(cla,message,type="INFO"):
+    funcName = sys._getframe().f_back.f_code.co_name
+    exec("""cla.{}_mp.print("{}","{}")""".format(funcName,message,type))
 
-
+@MessageBox
 class GoodBoy:
 
     def __init__(self):
         self.name = ""
     
     def say_hello(self):
-        print("hello",self.name)
+        printm(self,"hello: "+self.name)
     
     def say_bey(self):
-        print("bey~~",self.name)
+
+        printm(self,"bey~~ "+self.name)
     
     def __unhappy(self):
-        print("OHNO!!")
+        printm(self,"OHNO!! "+self.name)
 
     def say_it_does_not_matter(self):
         self.__unhappy()
-        print("It doesn't matter ",self.name)
+        printm(self,"It doesn't matter " + self.name)
+
 
 gb = GoodBoy()
 gb.name = "Peter"
