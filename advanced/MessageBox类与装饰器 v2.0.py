@@ -13,6 +13,7 @@ class MessagePrinter:
             #type有四种类型
             # IS-info, INFO, ERR, WARN
             # inside_info 不具有用户提示的属性
+        self.original_print = print
 
     def print_core(self,message,type="INFO",source="None"):
         ms = ""
@@ -29,7 +30,7 @@ class MessagePrinter:
         if self.setting["source"]:
             ms += "({})".format(source)
         ms += ":"+message
-        print(ms)
+        self.original_print(ms)
 
 
 class MessageBox:
@@ -70,12 +71,10 @@ class MessageBox:
                 self.mp.print_core("finish","IS-info",func.__name__)
             return wrapper
 
-
-def printm(message,type="INFO"):
+mp = MessagePrinter()
+def print(message,type="INFO"):
     source = sys._getframe().f_back.f_code.co_name
     mp.print_core(message,type,source)
-
-mp = MessagePrinter()
 
 @MessageBox(mp=mp)
 class GoodBoy:
@@ -84,18 +83,18 @@ class GoodBoy:
         self.name = ""
     
     def say_hello(self):
-        printm("hello: "+self.name)
+        print("hello: "+self.name)
     
     def say_bey(self):
 
-        printm("bey~~ "+self.name)
+        print("bey~~ "+self.name)
     
     def __unhappy(self):
-        printm("OHNO!! "+self.name)
+        print("OHNO!! "+self.name)
 
     def say_it_does_not_matter(self):
         self.__unhappy()
-        printm("It doesn't matter " + self.name)
+        print("It doesn't matter " + self.name)
 
 
 gb = GoodBoy()
