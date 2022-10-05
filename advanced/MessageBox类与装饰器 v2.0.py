@@ -13,9 +13,8 @@ class MessagePrinter:
             #type有四种类型
             # IS-info, INFO, ERR, WARN
             # inside_info 不具有用户提示的属性
-        self.source = None
 
-    def print(self,message,type):
+    def print_core(self,message,type="INFO",source="None"):
         ms = ""
         if self.setting["date_and_time"]:
             t = time.time()
@@ -28,16 +27,22 @@ class MessagePrinter:
         if self.setting["type"]:
             ms += "[{}]".format(type)
         if self.setting["source"]:
-            ms += "({})".format(self.source)
+            ms += "({})".format(source)
         ms += ":"+message
         print(ms)
 
+
 class MessageBox:
 
-    def __init__(self,cla):
-        self.cla = cla
+    def __init__(self,mp,mode="easy"):
+        #here input arguments
+        self.mp = mp # message class
+        self.mode = mode # mode choice 
     
-    def __call__(self):
+    def __call__(self,cla):
+        # find out all of the functions created by the programmer
+        self.cla = cla
+
         all_functions = dir(self.cla)
         function_list = []
         for function in all_functions:
@@ -46,43 +51,51 @@ class MessageBox:
             else:
                 function_list.append(function)
 
+        # cover the original code to add the wrapper
         for function in function_list:
             exec("self.cla.{} = self.wrapper_maker(self.cla.{})".\
                 format(function,function))
         return self.cla
 
     def wrapper_maker(self,func):
-        def wrapper(*args, **kwds):
-            mp = MessagePrinter()
-            mp.source = func.__name__
-            mp.print("function is running","IS-info")
-            exec("self.cla.{}_mp = mp".format(mp.source))
-            func(self.cla, *args, **kwds)
-        return wrapper
+        if self.mode == "easy":
+            def wrapper(*args, **kwds):
+                self.mp.print_core("start running","IS-info",func.__name__)
+                func(*args, **kwds)
+            return wrapper
+        else:
+            def wrapper(*args, **kwds):
+                self.mp.print_core("start running","IS-info",func.__name__)
+                func(*args, **kwds)
+                self.mp.print_core("finish","IS-info",func.__name__)
+            return wrapper
 
-def printm(cla,message,type="INFO"):
-    funcName = sys._getframe().f_back.f_code.co_name
-    exec("""cla.{}_mp.print("{}","{}")""".format(funcName,message,type))
 
-@MessageBox
+def printm(message,type="INFO"):
+    source = sys._getframe().f_back.f_code.co_name
+    mp.print_core(message,type,source)
+
+mp = MessagePrinter()
+
+@MessageBox(mp=mp)
 class GoodBoy:
 
     def __init__(self):
         self.name = ""
     
     def say_hello(self):
-        printm(self,"hello: "+self.name)
+        printm("hello: "+self.name)
     
     def say_bey(self):
 
-        printm(self,"bey~~ "+self.name)
+        printm("bey~~ "+self.name)
     
     def __unhappy(self):
-        printm(self,"OHNO!! "+self.name)
+        printm("OHNO!! "+self.name)
 
     def say_it_does_not_matter(self):
         self.__unhappy()
-        printm(self,"It doesn't matter " + self.name)
+        printm("It doesn't matter " + self.name)
 
 
 gb = GoodBoy()

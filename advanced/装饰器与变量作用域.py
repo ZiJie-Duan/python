@@ -1,29 +1,21 @@
-"""
-def warpper_maker(func):
-    def warpper():
-        a = 666
-        func()
-    return warpper
-
-@warpper_maker
-def func1():
-    print(a)
-
-
-func1()
-"""
 import dis
+import sys
 
+def printa():
+    print(sys._getframe().f_back.f_code.co_name)
 
 def warp_maker(func):
     def warp():
-        print(dir(func.__code__))
+        print("OK")
         func()
     return warp
-
+    
+@warp_maker
 def func1():
-    print(a)
+    print("OK2")
+    printa()
 
-func1 = warp_maker(func1)
 func1()
+
 input()
+

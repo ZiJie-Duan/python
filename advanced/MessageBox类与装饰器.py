@@ -58,6 +58,9 @@ class MessageBox:
             mp.source = func.__name__
             mp.print("function is running","IS-info")
             exec("self.cla.{}_mp = mp".format(mp.source))
+            # here has a really serious problem
+            # that i don't know why i need to input a "self.cla"
+            # in the "func"
             func(self.cla, *args, **kwds)
         return wrapper
 
