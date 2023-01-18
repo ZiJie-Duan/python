@@ -14,12 +14,22 @@ print_mode_init = init_env()
 #https://github.com/openai/whisper
 
 
-SUB_TEXT = """[00:00.000 --> 00:06.400]  Hello, everyone. Again, my name is Mitch. I'll be in here by the time before we get into the
-[00:06.400 --> 00:12.400]  hands-on labs throughout the semester. I'm going to go through the orientation and laboratory safety.
-[00:13.200 --> 00:19.360]  What I have here is the safety contract. The same contract we've seen in our other classes as well.
-[00:19.360 --> 00:24.080]  Hopefully, you'll remember some of the material as we go through it. It's really broken down into
-[00:24.080 --> 00:31.920]  three different components. One being about dress code. One dealing with food and drinks
-[00:31.920 --> 00:38.160]  in the lab as well. We'll cover some ideas of policies and work conditions that are unique"""
+SUB_TEXT = """[00:00.000 --> 00:08.000]  I'm actually having a party over here.
+[00:08.000 --> 00:10.000]  You guys are more welcome to come with you guys.
+[00:10.000 --> 00:11.000]  I know.
+[00:11.000 --> 00:12.000]  Alright, for sure.
+[00:12.000 --> 00:17.000]  Yeah, I got another box I got to get, but I'll be over there in just a minute.
+[00:17.000 --> 00:18.000]  Alright, yeah.
+[00:18.000 --> 00:31.000]  For sure.
+[00:31.000 --> 00:34.000]  Let's make a toast to the neighbor.
+[00:34.000 --> 00:35.000]  Well, thank you.
+[00:35.000 --> 00:36.000]  Cheers.
+[00:36.000 --> 00:38.000]  Welcome to the neighbor's house.
+[00:38.000 --> 00:40.000]  Get ready to party.
+[00:40.000 --> 00:41.000]  Uh-huh.
+[00:41.000 --> 00:46.000]  And you can't even peek around my trailer.
+[00:46.000 --> 00:49.000]  You came to the right place.
+[00:49.000 --> 01:15.000]  Thank you."""
 
 @MessageBox(mp)
 class StrRWriter_Single:
@@ -160,30 +170,6 @@ class SUBTITLE_MAKER:
             print(str(new))
             print(str(line[1]))
 
-        
-
-
-# @MessageBox(mp,"normal")
-# def main():
-#     srw = StrRWriter()
-#     subt = TRANSLATOR(srw=srw)
-#     subt.apiurl = 'http://api.fanyi.baidu.com/api/trans/vip/translate'
-#     subt.appid = "" #check baidu account
-#     subt.secretyKey = ''
-#     subt.translate_check() 
-#     subt.translate()
-#     input("[END OF THE PROGRAM]")
-
-    # def translate_check(self):
-    #     orprint("\n\nTRANSLATE CHECK...")
-    #     orprint("API: Baidu")
-    #     orprint("Source file: " + self.srw.subtitle_path)
-    #     orprint("Processed file: " + self.srw.new_subtitle_path)
-    #     orprint("Language: EN -> CH")
-    #     input("Press Enter to Start......")
-# if __name__ == "__main__":
-#     main()
-# text = """
 
 def main():
     wt = Whisper_Transformer()
